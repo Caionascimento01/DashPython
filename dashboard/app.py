@@ -35,6 +35,11 @@ def load_series_temporais(path):
     return df
 
 # --- Carregamento dos dados ---
+# gdf_estados = load_localidade_geodf("..\datasets\gdf_estados.csv")
+# gdf_municipios = load_localidade_geodf(".\datasets\gdf_municipios.csv")
+# df_reclamacoes = load_series_temporais('.\datasets\RECLAMEAQUI_CARREFUOR_CLS.csv')
+
+# Alterado para rodar no stramlit Deploy
 gdf_estados = load_localidade_geodf("./datasets/gdf_estados.csv")
 gdf_municipios = load_localidade_geodf("./datasets/gdf_municipios.csv")
 df_reclamacoes = load_series_temporais('./datasets/RECLAMEAQUI_CARREFUOR_CLS.csv')
@@ -315,23 +320,32 @@ textos = ' '.join(df_filtrado['DESCRICAO'].dropna().astype(str).tolist())
 
 texto = " ".join(df_filtrado['DESCRICAO'].astype(str).tolist())
 print(len(texto)) 
-print(texto[:100])  
+print(texto[:100])
 
-# Gerar a nuvem de palavras
-wordcloud = WordCloud(
-    width=800,
-    height=400,
-    background_color='white',
-    stopwords=stopwords_portugues,
-    colormap='viridis', 
-    max_words=50
-).generate(texto)
+if texto and not texto.isspace():
+    
+    try:
+       # Gerar a nuvem de palavras
+        wordcloud = WordCloud(
+            width=800,
+            height=400,
+            background_color='white',
+            stopwords=stopwords_portugues,
+            colormap='viridis', 
+            max_words=50
+        ).generate(texto)
 
-# Plotar a WordCloud
-fig, ax = plt.subplots(figsize=(10, 5))
-ax.imshow(wordcloud, interpolation='bilinear')
-ax.axis('off')  # Remove os eixos
-st.pyplot(fig)
+        # Plotar a WordCloud
+        fig, ax = plt.subplots(figsize=(10, 5))
+        ax.imshow(wordcloud, interpolation='bilinear')
+        ax.axis('off')  # Remove os eixos
+        st.pyplot(fig)
+        
+    except Exception as e:
+        st.error(f"Ocorreu um erro ao gerar a nuvem de palavras: {e}")
+
+else:
+    st.info("Não há dados de texto suficientes para gerar a nuvem de palavras com os filtros selecionados.")
 
 
 # **Mapa do Brasil com heatmap** mostrando a quantidade de reclamações por **ano**, com granularidade por **estado ou município**.
