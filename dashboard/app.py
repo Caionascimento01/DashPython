@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import geopandas as gpd
 from shapely.geometry import Polygon
-import ast
 import plotly.express as px
 import folium
 from streamlit_folium import folium_static
