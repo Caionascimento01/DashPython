@@ -365,6 +365,9 @@ if estado != 'Todos':
     # Unificando com os dados de localização de cada estado
     gdf_final = gdf_municipios.merge(df_mapa, left_on='NM_MUN', right_on='MUNICIPIO', how='left')
 
+    # Substituindo valores nulos
+    gdf_final['Qtd_Reclamacoes'] = gdf_final['Qtd_Reclamacoes'].fillna(0).astype(int)
+
     # Adicionando as informações no mapa
     choropleth = folium.Choropleth(
         geo_data=gdf_final,
@@ -403,6 +406,9 @@ else:
 
     # Unificando com os dados de localização de cada estado
     gdf_final = gdf_estados.merge(df_mapa, left_on='NM_UF', right_on='NOME_UF', how='left')
+
+    # Substituindo valores nulos
+    gdf_final['Qtd_Reclamacoes'] = gdf_final['Qtd_Reclamacoes'].fillna(0).astype(int)
 
     # Adicionando as informações no mapa
     choropleth = folium.Choropleth(

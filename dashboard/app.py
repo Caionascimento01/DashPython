@@ -6,7 +6,6 @@ import plotly.express as px
 import folium
 from streamlit_folium import folium_static
 import nltk
-nltk.download('stopwords')
 from nltk.corpus import stopwords
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
@@ -36,9 +35,9 @@ def load_series_temporais(path):
     return df
 
 # --- Carregamento dos dados ---
-gdf_estados = load_localidade_geodf("..\datasets\gdf_estados.csv")
-gdf_municipios = load_localidade_geodf("..\datasets\gdf_municipios.csv")
-df_reclamacoes = load_series_temporais('..\datasets\RECLAMEAQUI_CARREFUOR_CLS.csv')
+gdf_estados = load_localidade_geodf("../datasets/gdf_estados.csv")
+gdf_municipios = load_localidade_geodf("../datasets/gdf_municipios.csv")
+df_reclamacoes = load_series_temporais('../datasets/RECLAMEAQUI_CARREFUOR_CLS.csv')
 
 
 # --- Título do Dashboard ---
@@ -291,6 +290,8 @@ else:
 # **WordCloud** com as palavras mais frequentes nos textos das descrições.
 st.subheader("📝 WordCloud - Palavras mais Frequentes nas Descrições")
 
+nltk.download('stopwords')
+
 # Obter a lista de stopwords em português
 stopwords_portugues = stopwords.words('portuguese')
 
@@ -365,6 +366,9 @@ if estado != 'Todos':
     # Unificando com os dados de localização de cada estado
     gdf_final = gdf_municipios.merge(df_mapa, left_on='NM_MUN', right_on='MUNICIPIO', how='left')
 
+    # Substituindo valores nulos
+    gdf_final['Qtd_Reclamacoes'] = gdf_final['Qtd_Reclamacoes'].fillna(0).astype(int)
+
     # Adicionando as informações no mapa
     choropleth = folium.Choropleth(
         geo_data=gdf_final,
@@ -403,6 +407,9 @@ else:
 
     # Unificando com os dados de localização de cada estado
     gdf_final = gdf_estados.merge(df_mapa, left_on='NM_UF', right_on='NOME_UF', how='left')
+
+    # Substituindo valores nulos
+    gdf_final['Qtd_Reclamacoes'] = gdf_final['Qtd_Reclamacoes'].fillna(0).astype(int)
 
     # Adicionando as informações no mapa
     choropleth = folium.Choropleth(
