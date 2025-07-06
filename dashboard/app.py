@@ -36,8 +36,8 @@ def load_series_temporais(path):
     return df
 
 # --- Carregamento dos dados ---
-gdf_municipios = load_localidade_geodf("../datasets/gdf_municipios.csv")
 gdf_estados = load_localidade_geodf("../datasets/gdf_estados.csv")
+gdf_municipios = load_localidade_geodf("../datasets/gdf_municipios.csv")
 df_reclamacoes = load_series_temporais('../datasets/RECLAMEAQUI_CARREFUOR_CLS.csv')
 
 
