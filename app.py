@@ -336,15 +336,15 @@ st.pyplot(fig)
 # **Mapa do Brasil com heatmap** mostrando a quantidade de reclamações por **ano**, com granularidade por **estado ou município**.
 #  > O mapa **deve conter um seletor para o ano** que será visualizado.
 st.subheader("🗺️ Mapa de calor - Reclamações por Estado / Município")
-st.markdown("""Para apresentar as informações por municípios, selecione um estado nos filtros laterais
-               
-            Selecione o ano:
-            """)
+st.markdown("Para apresentar as informações por municípios, selecione um estado nos filtros laterais")
 
-# Seletor de ano para mapa
-opcoes_anos = sorted(df_filtrado['ANO'].unique())
-todas_opcoes = ['Todos'] + opcoes_anos
-ano = st.selectbox("Ano", options=todas_opcoes)
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    # Seletor de ano para mapa
+    opcoes_anos = sorted(df_filtrado['ANO'].unique())
+    todas_opcoes = ['Todos'] + opcoes_anos
+    ano = st.selectbox("Selecione o ano:", options=todas_opcoes)
 
 if ano != 'Todos':
     df_mapa = df_filtrado[df_filtrado['ANO'] == ano]
