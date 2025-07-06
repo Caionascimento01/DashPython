@@ -424,7 +424,7 @@ else:
         fill_opacity=0.7,
         line_opacity=0.2,
         legend_name='Quantidade de Reclamações',
-        bins=[1, 20, 40, 80, 160, 320, 660],
+        bins=8,
         highlight=True, # Destaca a área ao passar o mouse
     )
 
@@ -443,9 +443,4 @@ else:
     
 folium_static(mapa, width=1000, height=600)
 
-
-# ### **Os gráficos devem ser interativos e filtráveis com seletores de:**
-
-# # Estado
-# # Status
-# # Faixa de tamanho do texto da reclamação
+### Fim do código
