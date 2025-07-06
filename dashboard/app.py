@@ -10,7 +10,6 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
-from branca.colormap import linear
 
 # --- Configurações da página ---
 st.set_page_config(
@@ -374,7 +373,7 @@ if estado != 'Todos':
         columns=['MUNICIPIO', 'Qtd_Reclamacoes'],
         key_on='feature.properties.NM_MUN', # Chave no GeoJSON para conectar os dados
         fill_color='YlOrRd', # Nome do colormap (escala de cores)
-        nan_fill_color='White',
+        nan_fill_color='gray',
         nan_fill_opacity=0.4,
         fill_opacity=0.7,
         line_opacity=0.2,
@@ -413,7 +412,7 @@ else:
         columns=['NOME_UF', 'Qtd_Reclamacoes'],
         key_on='feature.properties.NM_UF', # Chave no GeoJSON para conectar os dados
         fill_color='YlOrRd', # Nome do colormap (escala de cores)
-        nan_fill_color='White',
+        nan_fill_color='gray',
         nan_fill_opacity=0.4,
         fill_opacity=0.7,
         line_opacity=0.2,
