@@ -40,9 +40,9 @@ def load_series_temporais(path):
 # df_reclamacoes = load_series_temporais('.\datasets\RECLAMEAQUI_CARREFUOR_CLS.csv')
 
 # Alterado para rodar no stramlit Deploy
-gdf_estados = load_localidade_geodf("./datasets/gdf_estados.csv")
-gdf_municipios = load_localidade_geodf("./datasets/gdf_municipios.csv")
-df_reclamacoes = load_series_temporais('./datasets/RECLAMEAQUI_CARREFUOR_CLS.csv')
+gdf_estados = load_localidade_geodf("../datasets/gdf_estados.csv")
+gdf_municipios = load_localidade_geodf("../datasets/gdf_municipios.csv")
+df_reclamacoes = load_series_temporais('../datasets/RECLAMEAQUI_CARREFUOR_CLS.csv')
 
 
 # --- Título do Dashboard ---
